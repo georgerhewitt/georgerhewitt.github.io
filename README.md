@@ -19,9 +19,7 @@ George R. Hewitt is a seasoned web developer based in Austin, Texas, currently w
 - **A11yJobs.com**  
   - Founder and builder of the job board platform for accessibility-focused positions.  
   - Featured in listings such as Apple’s “Web Accessibility SME” job posting, acknowledging the site’s origins in Austin.
-  
-- **GitHub Accessibility Role**  
-  Listed a “Software Engineer II – Accessibility” role created via A11yJobs.com, reinforcing his involvement in inclusive engineering.
+
 
 ---
 
