@@ -4,137 +4,430 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>George R. Hewitt</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --accent: #0f766e;
+      --accent-dim: #ccfbf1;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --radius: 14px;
+      --shadow-card: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.05);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.07);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
+      background: var(--bg);
+      color: var(--text-primary);
       margin: 0;
       padding: 0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    header {
-      background: #0d6efd;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    section {
-      margin-bottom: 2.5rem;
-    }
-    h1 {
 
-      font-size: 2.5rem;
+    /* ── Header ── */
+    header {
+      background: #0f172a;
+      padding: 5rem 2rem 5.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    h2 {
-      color: #0d6efd;
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 70% -10%, rgba(20,184,166,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 20% 110%, rgba(99,102,241,0.12) 0%, transparent 60%);
     }
-    ul {
-      padding-left: 1.5rem;
+
+    /* Subtle grid texture */
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-eyebrow {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #5eead4;
+      margin-bottom: 1rem;
+      padding: 0.3rem 0.9rem;
+      border: 1px solid rgba(94,234,212,0.3);
+      border-radius: 999px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #f8fafc;
+      margin: 0 0 1rem;
+    }
+
+    .header-role {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #94a3b8;
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+
+    /* Curved bottom edge */
+    .header-curve {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: var(--bg);
+      clip-path: ellipse(60% 100% at 50% 100%);
+      z-index: 2;
+    }
+
+    /* ── Layout ── */
+    main {
+      max-width: 860px;
+      margin: 3rem auto;
+      padding: 0 1.25rem;
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    /* ── Cards ── */
     .card {
-      background: white;
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      margin-bottom: 1.5rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 2rem 2.25rem;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-1px);
+    }
+
+    /* ── Section headings ── */
+    h2 {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin: 0 0 1.25rem;
+      padding-bottom: 0.875rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── About ── */
+    .card > p {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 0.97rem;
+      line-height: 1.75;
+    }
+
+    .card > p strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ── Experience list ── */
+    .experience-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .experience-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 1rem;
+      align-items: start;
+    }
+
+    .exp-marker {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .exp-content strong {
+      display: block;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .exp-content span {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      letter-spacing: 0.01em;
+      border: 1px solid rgba(15,118,110,0.12);
+    }
+
+    /* ── Online Presence ── */
+    .presence-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .presence-list li {
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .presence-list li strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ── Quick Facts table ── */
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
     }
-    table, th, td {
-      border: 1px solid #dee2e6;
+
+    tr {
+      border-bottom: 1px solid var(--border);
     }
-    th, td {
-      padding: 0.75rem;
+
+    tr:last-child {
+      border-bottom: none;
+    }
+
+    th {
       text-align: left;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 0.875rem 1rem 0.875rem 0;
+      width: 28%;
+      vertical-align: top;
     }
-    a {
-      color: #0d6efd;
+
+    td {
+      padding: 0.875rem 0;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Links ── */
+    .links-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .links-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 0.93rem;
+    }
+
+    .links-list a {
+      color: var(--accent);
       text-decoration: none;
+      font-weight: 600;
+      transition: color 0.15s;
     }
-    a:hover {
+
+    .links-list a::after {
+      content: ' \2197';
+      font-size: 0.75em;
+      opacity: 0.6;
+    }
+
+    .links-list a:hover {
+      color: #065f5b;
       text-decoration: underline;
+      text-underline-offset: 3px;
     }
+
+    .link-desc {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ── Footer ── */
     footer {
       text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #6c757d;
+      padding: 2.5rem 1rem 3rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 1.5rem; }
+      th { width: 35%; }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>George R. Hewitt</h1>
-    <p><strong>Web Developer & Accessibility Advocate</strong></p>
-    <p>Austin, Texas, USA</p>
+    <div class="header-inner">
+      <span class="header-eyebrow">Austin, Texas</span>
+      <h1>George R. Hewitt</h1>
+      <p class="header-role">Web Developer &amp; Accessibility Advocate</p>
+    </div>
+    <div class="header-curve"></div>
   </header>
 
   <main>
+
     <section class="card">
-      <h2>👨‍💻 About</h2>
+      <h2>About</h2>
       <p>George R. Hewitt is a seasoned web developer based in Austin, Texas, currently working with the State of Texas to build impactful digital products that serve the public. He is also the creator of <strong>A11yJobs.com</strong>, a job board dedicated to digital accessibility, showcasing his commitment to inclusive design.</p>
     </section>
 
     <section class="card">
-      <h2>💼 Professional Experience</h2>
-      <ul>
-        <li><strong>State of Texas:</strong> Develops government-facing products focused on usability and accessibility.</li>
-        <li><strong>A11yJobs.com:</strong> Founder and builder of the platform. Featured in listings such as Apple’s “Web Accessibility SME” job posting.</li>
-        <li><strong>Dell.com:</strong> Contributed to various web projects, emphasizing user experience and product design, achieving significant sales milestones.</li>
-
+      <h2>Professional Experience</h2>
+      <ul class="experience-list">
+        <li>
+          <span class="exp-marker"></span>
+          <div class="exp-content">
+            <strong>State of Texas</strong>
+            <span>Develops government-facing products focused on usability and accessibility.</span>
+          </div>
+        </li>
+        <li>
+          <span class="exp-marker"></span>
+          <div class="exp-content">
+            <strong>A11yJobs.com</strong>
+            <span>Founder and builder of the platform. Featured in listings such as Apple's "Web Accessibility SME" job posting.</span>
+          </div>
+        </li>
+        <li>
+          <span class="exp-marker"></span>
+          <div class="exp-content">
+            <strong>Dell.com</strong>
+            <span>Contributed to various web projects, emphasizing user experience and product design, achieving significant sales milestones.</span>
+          </div>
+        </li>
       </ul>
     </section>
 
     <section class="card">
-      <h2>🛠️ Skills & Specialties</h2>
-      <ul>
-        <li>Web design and development (HTML, CSS, JavaScript)</li>
-        <li>E-commerce business development</li>
-        <li>Client/server-side coding</li>
-        <li>Information architecture</li>
-        <li>Digital accessibility (WCAG standards, assistive technologies)</li>
+      <h2>Skills &amp; Specialties</h2>
+      <div class="skills-grid">
+        <span class="skill-tag">HTML &amp; CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Web Development</span>
+        <span class="skill-tag">E-commerce</span>
+        <span class="skill-tag">Client/Server-side Coding</span>
+        <span class="skill-tag">Information Architecture</span>
+        <span class="skill-tag">Digital Accessibility</span>
+        <span class="skill-tag">WCAG Standards</span>
+        <span class="skill-tag">Assistive Technologies</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Online Presence</h2>
+      <ul class="presence-list">
+        <li><strong>LinkedIn</strong> &mdash; Expertise in web and graphic design, e-commerce, and information architecture.</li>
+        <li><strong>Bluesky</strong> &mdash; <em>a11yjobs.bsky.social</em> &mdash; Web developer based in Austin, Texas.</li>
       </ul>
     </section>
 
     <section class="card">
-      <h2>🌐 Online Presence</h2>
-      <ul>
-        <li><strong>LinkedIn:</strong> Profiles indicate expertise in web and graphic design, e-commerce, and information architecture.</li>
-        <li><strong>Bluesky:</strong> <em>a11yjobs.bsky.social</em> — “I’m George R. Hewitt, a web developer based in Austin, Texas…”</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>📌 Quick Facts</h2>
+      <h2>Quick Facts</h2>
       <table>
-        <tr><th>Attribute</th><th>Details</th></tr>
-        <tr><td><strong>Base</strong></td><td>Austin, Texas</td></tr>
-        <tr><td><strong>Innovation</strong></td><td>Founder of A11yJobs.com (accessibility job board)</td></tr>
-        <tr><td><strong>Advocacy</strong></td><td>Promotes web accessibility standards and inclusive digital experiences</td></tr>
+        <tr>
+          <th>Base</th>
+          <td>Austin, Texas</td>
+        </tr>
+        <tr>
+          <th>Innovation</th>
+          <td>Founder of A11yJobs.com &mdash; accessibility job board</td>
+        </tr>
+        <tr>
+          <th>Advocacy</th>
+          <td>Promotes web accessibility standards and inclusive digital experiences</td>
+        </tr>
       </table>
     </section>
 
     <section class="card">
-      <h2>🔗 Useful Links</h2>
-      <ul>
-        <li><a href="https://www.a11yjobs.com" target="_blank">A11yJobs.com</a> – Job board for digital accessibility roles</li>
-        <li><a href="https://www.linkedin.com/in/georgehewitt" target="_blank">LinkedIn</a> – Professional background and portfolio</li>
-        <li><a href="https://bsky.app/profile/a11yjobs.bsky.social" target="_blank">Bluesky</a> – Personal and professional updates</li>
+      <h2>Useful Links</h2>
+      <ul class="links-list">
+        <li>
+          <a href="https://www.a11yjobs.com" target="_blank" rel="noopener">A11yJobs.com</a>
+          <span class="link-desc">Job board for digital accessibility roles</span>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/georgehewitt" target="_blank" rel="noopener">LinkedIn</a>
+          <span class="link-desc">Professional background and portfolio</span>
+        </li>
+        <li>
+          <a href="https://bsky.app/profile/a11yjobs.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+          <span class="link-desc">Personal and professional updates</span>
+        </li>
       </ul>
     </section>
+
   </main>
 
   <footer>
-    &copy; 2025 George R. Hewitt. Built with 💙 for accessibility and openness.
+    &copy; 2025 George R. Hewitt &mdash; Built for accessibility and openness.
   </footer>
+
 </body>
 </html>
